@@ -1,11 +1,8 @@
-
-const page = () => {
+export default function Home() {
   return (
-    <div className='flex h-screen flex-col items-center justify-center'>
-      <h1>Welcome to Silo</h1>
-      <p>one place for all your files!</p>
+    <div className="flex-center h-screen">
+      <h1 className="h1">Storeit! The only storage you need</h1>
+     
     </div>
-  )
+  );
 }
-
-export default page
