@@ -1,10 +1,11 @@
 'use client';
 
+import { createAccount, signInUser } from '@/lib/actions/user.actions';
 import { zodResolver } from '@hookform/resolvers/zod';
+import Link from 'next/link';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import Link from 'next/link';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -34,6 +35,7 @@ const authFormSchema = (formType: FormType) => {
 export function AuthForm({ type }: { type: FormType }) {
   const [isloading, setIsLoading] = React.useState(false);
   const [errorMessage, setErrorMessage] = React.useState('');
+  const [accountId, setAccountId] = React.useState<string | null>(null);
   const formSchema = authFormSchema(type);
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
@@ -45,10 +47,24 @@ export function AuthForm({ type }: { type: FormType }) {
   });
 
   // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values);
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    setIsLoading(true);
+    setErrorMessage('');
+    try {
+      const user =
+        type === 'sign-up'
+          ? await createAccount({
+              fullName: values.fullName || '',
+              email: values.email,
+            })
+          : await signInUser({ email: values.email });
+
+      setAccountId(user.accountId);
+    } catch {
+      setErrorMessage('Failed to create account. Please try again.');
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   return (
@@ -114,14 +130,13 @@ export function AuthForm({ type }: { type: FormType }) {
           <div>
             <p className="form-footer-text">
               {type === 'sign-in'
-                ? 'Don\'t have an account?'
+                ? "Don't have an account?"
                 : 'Already have an account?'}{' '}
-              <Link 
+              <Link
                 href={type === 'sign-in' ? '/sign-up' : '/sign-in'}
                 className="text-brand"
               >
                 {type === 'sign-in' ? 'Sign up' : 'Sign in'}
-                
               </Link>
             </p>
           </div>
@@ -132,4 +147,3 @@ export function AuthForm({ type }: { type: FormType }) {
 }
 // todo: add loading spinner to button
 // todo: add styles to form
- 
