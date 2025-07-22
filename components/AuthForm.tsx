@@ -1,14 +1,15 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import React from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
+import Link from 'next/link';
 
 import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -16,22 +17,30 @@ import {
 } from '@/components/ui/form';
 
 import { Input } from '@/components/ui/input';
-
-const formSchema = z.object({
-  username: z.string().min(2, {
-    message: 'Username must be at least 2 characters.',
-  }),
-});
-
 type FormType = 'sign-in' | 'sign-up';
 
+const authFormSchema = (formType: FormType) => {
+  return z.object({
+    fullName:
+      formType === 'sign-up'
+        ? z.string().min(2, {
+            message: 'Username must be at least 2 characters.',
+          })
+        : z.string().optional(),
+    email: z.string().email(),
+  });
+};
+
 export function AuthForm({ type }: { type: FormType }) {
-  // ...
+  const [isloading, setIsLoading] = React.useState(false);
+  const [errorMessage, setErrorMessage] = React.useState('');
+  const formSchema = authFormSchema(type);
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      username: '',
+      fullName: '',
+      email: '',
     },
   });
 
@@ -52,25 +61,75 @@ export function AuthForm({ type }: { type: FormType }) {
           {type === 'sign-up' && (
             <FormField
               control={form.control}
-              name="username"
+              name="fullName"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Username</FormLabel>
-                  <FormControl>
-                    <Input placeholder="shadcn" {...field} />
-                  </FormControl>
-                  <FormDescription>
-                    This is your public display name.
-                  </FormDescription>
-                  <FormMessage />
+                  <div className="shad-form-item">
+                    <FormLabel className="shad-form-label">Full Name</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="Please enter your full name"
+                        {...field}
+                        className="shad-input"
+                      />
+                    </FormControl>
+                  </div>
+                  <FormMessage className="shad-form-message" />
                 </FormItem>
               )}
             />
           )}
-          <Button type="submit">Submit</Button>
+          <FormField
+            control={form.control}
+            name="email"
+            render={({ field }) => (
+              <FormItem>
+                <div className="shad-form-item">
+                  <FormLabel className="shad-form-label">Email</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="email"
+                      placeholder="Please enter your email address"
+                      {...field}
+                      className="shad-input"
+                    />
+                  </FormControl>
+                </div>
+                <FormMessage className="shad-form-message" />
+              </FormItem>
+            )}
+          />
+          <Button type="submit" className="form-submit-button">
+            {isloading
+              ? 'Loading...'
+              : type === 'sign-in'
+              ? 'Sign in'
+              : 'Sign up'}
+          </Button>
+          {errorMessage && (
+            <div className="error-message">
+              <p>{errorMessage}</p>
+            </div>
+          )}
+          <div>
+            <p className="form-footer-text">
+              {type === 'sign-in'
+                ? 'Don\'t have an account?'
+                : 'Already have an account?'}{' '}
+              <Link 
+                href={type === 'sign-in' ? '/sign-up' : '/sign-in'}
+                className="text-brand"
+              >
+                {type === 'sign-in' ? 'Sign up' : 'Sign in'}
+                
+              </Link>
+            </p>
+          </div>
         </form>
       </Form>
-      {/* todo: otp-verification */}
     </>
   );
 }
+// todo: add loading spinner to button
+// todo: add styles to form
+ 
