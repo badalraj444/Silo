@@ -3,7 +3,7 @@
 import { createAccount, signInUser } from '@/lib/actions/user.actions';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Link from 'next/link';
-import React from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
@@ -17,7 +17,9 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 
+import { OtpModal } from '@/components/otpModal';
 import { Input } from '@/components/ui/input';
+
 type FormType = 'sign-in' | 'sign-up';
 
 const authFormSchema = (formType: FormType) => {
@@ -33,9 +35,9 @@ const authFormSchema = (formType: FormType) => {
 };
 
 export function AuthForm({ type }: { type: FormType }) {
-  const [isloading, setIsLoading] = React.useState(false);
-  const [errorMessage, setErrorMessage] = React.useState('');
-  const [accountId, setAccountId] = React.useState<string | null>(null);
+  const [isloading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const [accountId, setAccountId] = useState(null);
   const formSchema = authFormSchema(type);
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
@@ -142,6 +144,9 @@ export function AuthForm({ type }: { type: FormType }) {
           </div>
         </form>
       </Form>
+      {accountId && (
+        <OtpModal email={form.getValues('email')} accountId={accountId} />
+      )}
     </>
   );
 }
