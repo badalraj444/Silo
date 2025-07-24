@@ -35,3 +35,10 @@
 - i should learn tailwind css v4 first, then come back to this project
 
 ## sign in is not working properly, in edge case: usr not registered, otherwise fine
+
+## create user failed , worked earlier, now failed
+- reason: the database schema was deleted by mistake while trying to delete only the records
+- solution: recreated the database schema, and reconnected the database
+## nextjs framework failed, while i set image src to foreign url
+- reason: nextjs image component does not allow foreign urls, it needs to be configured in next.config.js file
+- solution: added the foreign url to the next.config.js file.
