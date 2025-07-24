@@ -33,3 +33,5 @@
 - !important in @apply needed to be removed. 
 - still many errors
 - i should learn tailwind css v4 first, then come back to this project
+
+## sign in is not working properly, in edge case: usr not registered, otherwise fine
