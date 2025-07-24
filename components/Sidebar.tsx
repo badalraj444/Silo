@@ -16,7 +16,7 @@ const Sidebar = ({ fullName, avatar, email }: Props) => {
   const pathname = usePathname();
 
   return (
-    <aside className="sidebar">
+    <aside className="remove-scrollbar hidden h-screen w-[90px] flex-col overflow-auto px-5 py-7 sm:flex lg:w-[280px] xl:w-[325px]">
       <Link href="/">
         <Image
           src="/assets/icons/logo-full-brand.svg"

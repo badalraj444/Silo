@@ -34,7 +34,23 @@
 - still many errors
 - i should learn tailwind css v4 first, then come back to this project
 
-## sign in is not working properly, in edge case: usr not registered, otherwise fine
+## sign in(even sign up) is not working properly, in edge case: usr already registered, otherwise fine, sometimes it works
+- log: TypeError: fetch failed
+    at async getCurrentUser (lib\actions\user.actions.ts:105:17)
+    at async layout (app\(root)\layout.tsx:9:24)
+  103 |     const result = await account.get();
+  104 |
+> 105 |     const user = await databases.listDocuments(
+      |                 ^
+  106 |       appwriteConfig.databaseId,
+  107 |       appwriteConfig.usersCollectionId,
+  108 |       [Query.equal("accountId", result.$id)], {
+  [cause]: [Error [ConnectTimeoutError]: Connect Timeout Error (attempted addresses: 151.101.131.52:443, 151.101.3.52:443, 151.101.67.52:443, 151.101.195.52:443)] {
+    code: 'UND_ERR_CONNECT_TIMEOUT'
+  }
+}
+## email verification took too long to work
+- could be slow network issue
 
 ## create user failed , worked earlier, now failed
 - reason: the database schema was deleted by mistake while trying to delete only the records
@@ -42,3 +58,27 @@
 ## nextjs framework failed, while i set image src to foreign url
 - reason: nextjs image component does not allow foreign urls, it needs to be configured in next.config.js file
 - solution: added the foreign url to the next.config.js file.
+
+## sign in took so long to do something after otp verification modal clear
+- it felt like hang
+- but it did render home page, but very late
+- logs: Error: No session
+    at createSessionClient (lib\appwrite\index.ts:14:40)
+    at async getCurrentUser (lib\actions\user.actions.ts:101:35)
+    at async layout (app\(root)\layout.tsx:9:24)
+  12 |   const session = (await cookies()).get("appwrite-session");
+  13 |
+> 14 |   if (!session || !session.value) throw new Error("No session");
+     |                                        ^
+  15 |
+  16 |   client.setSession(session.value);
+  17 |
+ GET / 307 in 17467ms
+ GET /sign-in 200 in 12457ms
+ ○ Compiling /favicon.ico ...
+ ✓ Compiled /favicon.ico in 759ms
+ GET /favicon.ico 200 in 1396ms
+ POST /sign-in 200 in 16447ms
+ POST /sign-in 200 in 5753ms
+ GET / 200 in 10425ms
+ GET / 200 in 11761ms

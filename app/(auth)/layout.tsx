@@ -6,7 +6,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       <section className="hidden w-1/2 items-center justify-center bg-brand p-10 lg:flex xl:w-2/5">
         <div className="flex max-h-[800px] max-w-[430px] flex-col justify-center space-y-12">
           <Image
-            src="/favicon.ico"
+            src="/assets/icons/logo-full.svg"
             alt="logo"
             width={108}
             height={82}
@@ -19,7 +19,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
             </p>
           </div>
           <Image
-            src="/storage.png"
+            src="/assets/images/files.png"
             alt="logo"
             width={342}
             height={342}
