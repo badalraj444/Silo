@@ -1,22 +1,20 @@
-plan:
 
-1. translate the global.css file to the new one
 
-2. upload file functionality:
+2.>>>> upload file functionality:
 
 npm instsll --save react-dropzone ------
 
-! rectify the bucketFileId attribut in appWrite
+! rectify the bucketFileId attribut in appWrite ------
 
-! add the type index file ----
+! add the index.d.ts file ----
 
-! install deps: toast, dropzone --------
+! install deps: soneer(replacement for toast), dropzone --------
 
-! add toast to app layout --
+! import and add toast to app layout ----
 
-! pass props 
+! pass props properly -----
 
-!! nextjs payload limit by default is only 4mb -> must add experimental object to the nextjs.config
+!! nextjs payload limit by default is only 4mb -> must add experimental object to the nextjs.config - watch from tutorial 
 
 ! might need to turn eslint rule off for typescript interface auto loading from index.ts file
 
