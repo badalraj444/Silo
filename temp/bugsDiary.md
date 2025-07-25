@@ -82,3 +82,7 @@
  POST /sign-in 200 in 5753ms
  GET / 200 in 10425ms
  GET / 200 in 11761ms
+
+ ## (upload files section)The toast component is deprecated. Use the sonner component instead.
+ - shadcn ui toast is deprecated
+ - ![alt text](image.png)
