@@ -66,7 +66,7 @@ export const createAccount = async ({
     );
   }
 
-  return parseStringify({ accountId });
+  return await parseStringify({ accountId });
 };
 
 export const verifySecret = async ({
@@ -88,7 +88,7 @@ export const verifySecret = async ({
       secure: true,
     });
 
-    return parseStringify({ sessionId: session.$id });
+    return await parseStringify({ sessionId: session.$id });
   } catch (error) {
     handleError(error, "Failed to verify OTP");
   }
@@ -109,7 +109,7 @@ export const getCurrentUser = async () => {
    console.log("5--obtained userdetails: ",user)
     if (user.total <= 0) return null;
     console.log("6--more than 0 values exist. now parsing....")
-    return  parseStringify(user.documents[0]);   // maybe this line needs time and is not waiting !!!!!!!!!!!! this was the culprit
+    return  await parseStringify(user.documents[0]);   // maybe this line needs time and is not waiting !!!!!!!!!!!! this was the culprit
   } catch (error) {
     console.log("error in getcurrentuser",error);
   }
@@ -138,7 +138,7 @@ export const signInUser = async ({ email }: { email: string }) => {
       return parseStringify({ accountId: existingUser.accountId });
     }
 
-    return parseStringify({ accountId: null, error: "User not found" });
+    return await parseStringify({ accountId: null, error: "User not found" });
   } catch (error) {
     handleError(error, "Failed to sign in user");
   }

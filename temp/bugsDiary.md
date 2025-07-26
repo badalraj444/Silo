@@ -89,4 +89,12 @@
 
  ## App crashed (Fetch failed), but not all the time
  - reason: the getuser function was not working properly:it said user not found 
- - bug: 
+ - bug: i made the parsestring fun async by mistake. this caused appearing the code that user was not found. it did not wait for proper report
+ - soln: i removed the async word
+
+ ## still, the app crashed surprisingly once in a while
+ - this time it says user not authorised
+ - also user not found
+ - seems the earlier bug is not fixed
+ --- parallel fetch request could be a problem?
+ 
