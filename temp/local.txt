@@ -19,3 +19,16 @@ npm instsll --save react-dropzone ------
 ! might need to turn eslint rule off for typescript interface auto loading from index.ts file
 
 * test edge cases for upload files function
+
+3.>>> search bar:
+
+! bug: once searched, the images dont go away when clicked aroung  
+
+
+
+ 5.>> ! dynamic routes are slow 
+   - main soln: fix and make it fast
+   - temp soln: use loading state to show user something is happening
+
+ 6.>> add on: add eg files for new user to not see empty spaces  
+

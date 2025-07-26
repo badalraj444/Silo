@@ -219,10 +219,10 @@
     @apply absolute -left-3 top-[-25px] z-10 w-[190px] object-contain !important;
   }
   .summary-type-size {
-    @apply h4 relative z-20 w-full text-right !important;
+    @apply text-[18px] leading-[20px] font-medium relative z-20 w-full text-right !important;
   }
   .summary-type-title {
-    @apply h5 relative z-20 text-center !important;
+    @apply text-[16px] leading-[24px] font-semibold relative z-20 text-center !important;
   }
   .dashboard-recent-files {
     @apply h-full rounded-[20px] bg-white p-5 xl:p-8 !important;
@@ -231,13 +231,13 @@
     @apply flex w-full flex-col xl:flex-row xl:justify-between !important;
   }
   .recent-file-name {
-    @apply subtitle-2 line-clamp-1 w-full text-light-100 sm:max-w-[200px] lg:max-w-[250px] !important;
+    @apply text-[14px] leading-[20px] font-semibold line-clamp-1 w-full text-light-100 sm:max-w-[200px] lg:max-w-[250px] !important;
   }
   .recent-file-date {
     @apply body-2 text-light-100/80 !important;
   }
   .empty-list {
-    @apply body-1 mt-10 text-center text-light-200 !important;
+    @apply text-[16px] leading-[24px] font-normal mt-10 text-center text-light-200 !important;
   }
 
   /* Type page */
@@ -334,10 +334,10 @@
     @apply fill-white text-4xl font-bold !important;
   }
   .chart-title {
-    @apply h3 font-bold md:text-center lg:text-left !important;
+    @apply text-[20px] leading-[28px] font-semibold font-bold md:text-center lg:text-left !important;
   }
   .chart-description {
-    @apply subtitle-1 mt-2 w-full text-white/70 md:text-center lg:text-left !important;
+    @apply text-[16px] leading-[24px] font-medium mt-2 w-full text-white/70 md:text-center lg:text-left !important;
   }
 
   /* FileUploader */

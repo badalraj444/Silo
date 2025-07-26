@@ -72,78 +72,89 @@ export function AuthForm({ type }: { type: FormType }) {
   return (
     <>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="auth-form">
-          <h1 className="form-title">
-            {type === 'sign-in' ? 'Sign-in' : 'Sign-up'}
-          </h1>
-          {type === 'sign-up' && (
-            <FormField
-              control={form.control}
-              name="fullName"
-              render={({ field }) => (
-                <FormItem>
-                  <div className="shad-form-item">
-                    <FormLabel className="shad-form-label">Full Name</FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder="Please enter your full name"
-                        {...field}
-                        className="shad-input"
-                      />
-                    </FormControl>
-                  </div>
-                  <FormMessage className="shad-form-message" />
-                </FormItem>
-              )}
-            />
-          )}
-          <FormField
-            control={form.control}
-            name="email"
-            render={({ field }) => (
-              <FormItem>
-                <div className="shad-form-item">
-                  <FormLabel className="shad-form-label">Email</FormLabel>
-                  <FormControl>
-                    <Input
-                      type="email"
-                      placeholder="Please enter your email address"
-                      {...field}
-                      className="shad-input"
-                    />
-                  </FormControl>
-                </div>
-                <FormMessage className="shad-form-message" />
-              </FormItem>
-            )}
-          />
-          <Button type="submit" className="form-submit-button">
-            {isloading
-              ? 'Loading...'
-              : type === 'sign-in'
-              ? 'Sign in'
-              : 'Sign up'}
-          </Button>
-          {errorMessage && (
-            <div className="error-message">
-              <p>{errorMessage}</p>
+  <form
+    onSubmit={form.handleSubmit(onSubmit)}
+    className="flex max-h-[800px] w-full max-w-[580px] flex-col justify-center space-y-6 transition-all lg:h-full lg:space-y-8"
+  >
+    <h1 className="text-[34px] leading-[42px] font-bold text-center text-light-100 md:text-left">
+      {type === 'sign-in' ? 'Sign-in' : 'Sign-up'}
+    </h1>
+    {type === 'sign-up' && (
+      <FormField
+        control={form.control}
+        name="fullName"
+        render={({ field }) => (
+          <FormItem>
+            <div className="flex h-[78px] flex-col justify-center rounded-xl border border-light-300 px-4 shadow-[0px_10px_30px_0px_rgba(66,71,97,0.1)]">
+              <FormLabel className="text-light-100 pt-2 text-[14px] leading-[20px] font-normal w-full">
+                Full Name
+              </FormLabel>
+              <FormControl>
+                <Input
+                  placeholder="Please enter your full name"
+                  {...field}
+                  className="border-none shadow-none p-0 outline-none ring-offset-transparent focus:ring-transparent focus:ring-offset-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0 placeholder:text-light-200 text-[14px] leading-[20px] font-normal"
+                />
+              </FormControl>
             </div>
-          )}
-          <div>
-            <p className="form-footer-text">
-              {type === 'sign-in'
-                ? "Don't have an account?"
-                : 'Already have an account?'}{' '}
-              <Link
-                href={type === 'sign-in' ? '/sign-up' : '/sign-in'}
-                className="text-brand"
-              >
-                {type === 'sign-in' ? 'Sign up' : 'Sign in'}
-              </Link>
-            </p>
+            <FormMessage className="text-red text-[14px] leading-[20px] font-normal ml-4" />
+          </FormItem>
+        )}
+      />
+    )}
+    <FormField
+      control={form.control}
+      name="email"
+      render={({ field }) => (
+        <FormItem>
+          <div className="flex h-[78px] flex-col justify-center rounded-xl border border-light-300 px-4 shadow-[0px_10px_30px_0px_rgba(66,71,97,0.1)]">
+            <FormLabel className="text-light-100 pt-2 text-[14px] leading-[20px] font-normal w-full">
+              Email
+            </FormLabel>
+            <FormControl>
+              <Input
+                type="email"
+                placeholder="Please enter your email address"
+                {...field}
+                className="border-none shadow-none p-0 outline-none ring-offset-transparent focus:ring-transparent focus:ring-offset-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0 placeholder:text-light-200 text-[14px] leading-[20px] font-normal"
+              />
+            </FormControl>
           </div>
-        </form>
-      </Form>
+          <FormMessage className="text-red text-[14px] leading-[20px] font-normal ml-4" />
+        </FormItem>
+      )}
+    />
+    <Button
+      type="submit"
+      className="bg-brand hover:bg-brand-100 transition-all rounded-full text-[14px] leading-[20px] font-medium h-[66px]"
+    >
+      {isloading
+        ? 'Loading...'
+        : type === 'sign-in'
+        ? 'Sign in'
+        : 'Sign up'}
+    </Button>
+    {errorMessage && (
+      <div className="text-[14px] leading-[20px] font-normal mx-auto w-fit rounded-xl bg-[#b80000]/5 px-8 py-4 text-center text-[#b80000]">
+        <p>{errorMessage}</p>
+      </div>
+    )}
+    <div>
+      <p className="form-footer-text">
+        {type === 'sign-in'
+          ? "Don't have an account?"
+          : 'Already have an account?'}{' '}
+        <Link
+          href={type === 'sign-in' ? '/sign-up' : '/sign-in'}
+          className="text-brand"
+        >
+          {type === 'sign-in' ? 'Sign up' : 'Sign in'}
+        </Link>
+      </p>
+    </div>
+  </form>
+</Form>
+
       {accountId && (
         <OtpModal email={form.getValues('email')} accountId={accountId} />
       )}

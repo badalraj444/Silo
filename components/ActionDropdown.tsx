@@ -1,12 +1,14 @@
-"use client";
+'use client';
 
+import { FileDetails, ShareInput } from '@/components/ActionsModalContent';
+import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogContent,
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@/components/ui/dialog";
+} from '@/components/ui/dialog';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,22 +16,20 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { useState } from "react";
-import Image from "next/image";
-import { Models } from "node-appwrite";
-import { actionsDropdownItems } from "@/constants";
-import Link from "next/link";
-import { constructDownloadUrl } from "@/lib/utils";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+} from '@/components/ui/dropdown-menu';
+import { Input } from '@/components/ui/input';
+import { actionsDropdownItems } from '@/constants';
 import {
   deleteFile,
   renameFile,
   updateFileUsers,
-} from "@/lib/actions/file.actions";
-import { usePathname } from "next/navigation";
-import { FileDetails, ShareInput } from "@/components/ActionsModalContent";
+} from '@/lib/actions/file.actions';
+import { constructDownloadUrl } from '@/lib/utils';
+import Image from 'next/image';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { Models } from 'node-appwrite';
+import { useState } from 'react';
 
 const ActionDropdown = ({ file }: { file: Models.Document }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -88,39 +88,52 @@ const ActionDropdown = ({ file }: { file: Models.Document }) => {
     const { value, label } = action;
 
     return (
-      <DialogContent className="shad-dialog button">
+      <DialogContent className="w-full max-w-md rounded-md border border-light-300 bg-white p-6 text-dark-900 shadow-lg dark:border-dark-400 dark:bg-dark-300 dark:text-white">
         <DialogHeader className="flex flex-col gap-3">
-          <DialogTitle className="text-center text-light-100">
+          <DialogTitle className="text-center text-lg font-semibold text-light-100 dark:text-light-100">
             {label}
           </DialogTitle>
-          {value === "rename" && (
+
+          {value === 'rename' && (
             <Input
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
+              className="rounded-md border border-light-300 bg-white px-3 py-2 text-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary dark:border-dark-400 dark:bg-dark-200 dark:text-white"
             />
           )}
-          {value === "details" && <FileDetails file={file} />}
-          {value === "share" && (
+
+          {value === 'details' && <FileDetails file={file} />}
+
+          {value === 'share' && (
             <ShareInput
               file={file}
               onInputChange={setEmails}
               onRemove={handleRemoveUser}
             />
           )}
-          {value === "delete" && (
-            <p className="delete-confirmation">
-              Are you sure you want to delete{` `}
-              <span className="delete-file-name">{file.name}</span>?
+
+          {value === 'delete' && (
+            <p className="text-sm text-light-100 dark:text-light-100">
+              Are you sure you want to delete{' '}
+              <span className="font-semibold text-red-500">{file.name}</span>?
             </p>
           )}
         </DialogHeader>
-        {["rename", "delete", "share"].includes(value) && (
+
+        {['rename', 'delete', 'share'].includes(value) && (
           <DialogFooter className="flex flex-col gap-3 md:flex-row">
-            <Button onClick={closeAllModals} className="modal-cancel-button">
+            <Button
+              onClick={closeAllModals}
+              className="w-full rounded-md border border-light-300 bg-gray-200 px-4 py-2 text-sm font-medium text-dark-900 hover:bg-gray-300 dark:border-dark-400 dark:bg-dark-400 dark:text-white dark:hover:bg-dark-300 md:w-auto"
+            >
               Cancel
             </Button>
-            <Button onClick={handleAction} className="modal-submit-button">
+
+            <Button
+              onClick={handleAction}
+              className="w-full flex items-center justify-center gap-2 rounded-md bg-primary px-4 py-2 text-sm font-semibold text-white hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary dark:bg-primary dark:hover:bg-primary/90 md:w-auto"
+            >
               <p className="capitalize">{value}</p>
               {isLoading && (
                 <Image
@@ -141,7 +154,7 @@ const ActionDropdown = ({ file }: { file: Models.Document }) => {
   return (
     <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
       <DropdownMenu open={isDropdownOpen} onOpenChange={setIsDropdownOpen}>
-        <DropdownMenuTrigger className="shad-no-focus">
+        <DropdownMenuTrigger className="focus:outline-none focus:ring-0 ring-offset-0">
           <Image
             src="/assets/icons/dots.svg"
             alt="dots"
@@ -149,28 +162,30 @@ const ActionDropdown = ({ file }: { file: Models.Document }) => {
             height={34}
           />
         </DropdownMenuTrigger>
-        <DropdownMenuContent>
-          <DropdownMenuLabel className="max-w-[200px] truncate">
+
+        <DropdownMenuContent className="min-w-[220px] rounded-md border border-light-300 bg-white p-2 shadow-md dark:border-dark-400 dark:bg-dark-300">
+          <DropdownMenuLabel className="max-w-[200px] truncate text-sm font-semibold text-dark-900 dark:text-white">
             {file.name}
           </DropdownMenuLabel>
-          <DropdownMenuSeparator />
+
+          <DropdownMenuSeparator className="my-1 h-px bg-light-200 dark:bg-dark-400" />
+
           {actionsDropdownItems.map((actionItem) => (
             <DropdownMenuItem
               key={actionItem.value}
-              className="shad-dropdown-item"
+              className="flex cursor-pointer items-center gap-2 rounded-md px-2 py-2 text-sm text-dark-900 hover:bg-gray-100 dark:text-white dark:hover:bg-dark-400"
               onClick={() => {
                 setAction(actionItem);
-
                 if (
-                  ["rename", "share", "delete", "details"].includes(
-                    actionItem.value,
+                  ['rename', 'share', 'delete', 'details'].includes(
+                    actionItem.value
                   )
                 ) {
                   setIsModalOpen(true);
                 }
               }}
             >
-              {actionItem.value === "download" ? (
+              {actionItem.value === 'download' ? (
                 <Link
                   href={constructDownloadUrl(file.bucketFileId)}
                   download={file.name}

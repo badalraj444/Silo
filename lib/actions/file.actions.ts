@@ -94,13 +94,14 @@ export const getFiles = async ({
   types = [],
   searchText = "",
   sort = "$createdAt-desc",
-  limit,
+  limit = 100,
 }: GetFilesProps) => {
   const { databases } = await createAdminClient();
 
   try {
+    console.log("1--inside getcurrentuser...")
     const currentUser = await getCurrentUser();
-
+    console.log("7--after executing getcurrentUser...")
     if (!currentUser) throw new Error("User not found");
 
     const queries = createQueries(currentUser, types, searchText, sort, limit);

@@ -7,9 +7,7 @@ import { ID, Query } from "node-appwrite";
 import { avatarPlaceholderUrl } from "@/constants/index";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-
-export const parseStringify = async (value: unknown) =>
-  JSON.parse(JSON.stringify(value));
+import { parseStringify } from "../utils";
 
 const getUserByEmail = async (email: string) => {
   const { databases } = await createAdminClient();
@@ -97,22 +95,23 @@ export const verifySecret = async ({
 };
 
 export const getCurrentUser = async () => {
+  console.log("2--inside getCurrent ");
   try {
     const { databases, account } = await createSessionClient();
-
+     console.log("3---created sessionclient ");
     const result = await account.get();
-
-    const user = await databases.listDocuments(
+    console.log("4-- account obtained:  ", result);
+    const user = await databases.listDocuments( //this function could be taking time, and others are not waiting for it
       appwriteConfig.databaseId,
       appwriteConfig.usersCollectionId,
       [Query.equal("accountId", result.$id)],
     );
-
+   console.log("5--obtained userdetails: ",user)
     if (user.total <= 0) return null;
-
-    return parseStringify(user.documents[0]);
+    console.log("6--more than 0 values exist. now parsing....")
+    return  parseStringify(user.documents[0]);   // maybe this line needs time and is not waiting !!!!!!!!!!!! this was the culprit
   } catch (error) {
-    console.log(error);
+    console.log("error in getcurrentuser",error);
   }
 };
 

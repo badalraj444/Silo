@@ -19,6 +19,7 @@ import {
 import { verifySecret } from '@/lib/actions/user.actions';
 import { REGEXP_ONLY_DIGITS_AND_CHARS } from 'input-otp';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 export const OtpModal = ({
   accountId,
@@ -49,46 +50,58 @@ export const OtpModal = ({
   };
   return (
     <div className="flex justify-center items-center">
-      <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <span className="text-brand-100">Account ID: {accountId}</span>
-            <AlertDialogTitle>Please enter OTP</AlertDialogTitle>
-            <AlertDialogDescription>
-              we've sent an one time password to{' '}
-              <span className="text-brand-100">{email}</span>
-              <br /> Please enter it below to verify your account.
-              <br />
-            </AlertDialogDescription>
-            <div className="flex justify-center items-center mt-4">
-              <InputOTP
-                maxLength={6}
-                value={password}
-                onChange={setPassword}
-                pattern={REGEXP_ONLY_DIGITS_AND_CHARS}
-              >
-                <InputOTPGroup>
-                  <InputOTPSlot index={0} />
-                  <InputOTPSlot index={1} />
-                  <InputOTPSlot index={2} />
-                  <InputOTPSlot index={3} />
-                  <InputOTPSlot index={4} />
-                  <InputOTPSlot index={5} />
-                </InputOTPGroup>
-              </InputOTP>
-            </div>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel onClick={() => setIsOpen(false)}>
-              Cancel
-            </AlertDialogCancel>
-            <AlertDialogAction onClick={handleSubmit}>
-              {isloading ? 'Verifying...' : 'Verify OTP'}
-            </AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
-    </div>
+  <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
+    <AlertDialogContent className="shad-alert-dialog">
+      <AlertDialogHeader className="relative flex justify-center">
+        
+        <AlertDialogTitle className="h2 text-center">Please enter OTP</AlertDialogTitle>
+        <AlertDialogDescription className="subtitle-2 text-center text-light-100">
+          we've sent an one time password to{' '}
+          <span className="text-[#EA6365]">{email}</span>
+          <br /> Please enter it below to verify your account.
+          <br />
+        </AlertDialogDescription>
+        <div className="flex justify-center items-center mt-4">
+          <InputOTP
+            maxLength={6}
+            value={password}
+            onChange={setPassword}
+            pattern={REGEXP_ONLY_DIGITS_AND_CHARS}
+          >
+            <InputOTPGroup>
+              <InputOTPSlot index={0} />
+              <InputOTPSlot index={1} />
+              <InputOTPSlot index={2} />
+              <InputOTPSlot index={3} />
+              <InputOTPSlot index={4} />
+              <InputOTPSlot index={5} />
+            </InputOTPGroup>
+          </InputOTP>
+        </div>
+      </AlertDialogHeader>
+      <AlertDialogFooter>
+        <div className="flex w-full flex-col gap-4">
+          <AlertDialogCancel onClick={() => setIsOpen(false)} className=" text-[14px] leading-[20px] font-medium hover:to-blue-700 transition-all rounded-full">
+          Cancel
+        </AlertDialogCancel>
+        <AlertDialogAction onClick={handleSubmit} className="bg-brand text-[14px] leading-[20px] font-medium hover:bg-brand-100 transition-all rounded-full">
+          Submit
+              {isloading && (
+                <Image
+                  src="/assets/icons/loader.svg"
+                  alt="loader"
+                  width={24}
+                  height={24}
+                  className="ml-2 animate-spin"
+                />
+              )}
+        </AlertDialogAction>
+        </div>
+      </AlertDialogFooter>
+    </AlertDialogContent>
+  </AlertDialog>
+</div>
+
   );
 };
 

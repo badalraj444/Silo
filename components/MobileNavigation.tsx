@@ -1,21 +1,21 @@
-"use client";
+'use client';
 
+import FileUploader from '@/components/FileUploader';
+import { Button } from '@/components/ui/button';
 import {
   Sheet,
   SheetContent,
   SheetTitle,
   SheetTrigger,
-} from "@/components/ui/sheet";
-import Image from "next/image";
-import React, { useState } from "react";
-import { usePathname } from "next/navigation";
-import { Separator } from "@radix-ui/react-separator";
-import { navItems } from "@/constants";
-import Link from "next/link";
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
-import FileUploader from "@/components/FileUploader";
-import { signOutUser } from "@/lib/actions/user.actions";
+} from '@/components/ui/sheet';
+import { navItems } from '@/constants';
+import { signOutUser } from '@/lib/actions/user.actions';
+import { cn } from '@/lib/utils';
+import { Separator } from '@radix-ui/react-separator';
+import Image from 'next/image';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { useState } from 'react';
 
 interface Props {
   $id: string;
@@ -36,11 +36,11 @@ const MobileNavigation = ({
   const pathname = usePathname();
 
   return (
-    <header className="flex h-[60px] justify-between px-5 sm:hidden">
+    <header className="flex h-[60px] items-center justify-between px-5 sm:hidden">
       <Image
-        src="/assets/icons/logo-full-brand.svg"
+        src="/assets/icons/logo-full-brand2.svg"
         alt="logo"
-        width={120}
+        width={60}
         height={52}
         className="h-auto"
       />
@@ -49,37 +49,43 @@ const MobileNavigation = ({
         <SheetTrigger>
           <Image
             src="/assets/icons/menu.svg"
-            alt="Search"
+            alt="menu"
             width={30}
             height={30}
           />
         </SheetTrigger>
-        <SheetContent className="shad-sheet h-screen px-3">
+
+        <SheetContent className="h-screen px-3 bg-white dark:bg-dark-300">
           <SheetTitle>
-            <div className="header-user">
+            <div className="flex items-center gap-4 px-2 py-4">
               <Image
                 src={avatar}
                 alt="avatar"
                 width={44}
                 height={44}
-                className="header-user-avatar"
+                className="rounded-full object-cover"
               />
-              <div className="sm:hidden lg:block">
-                <p className="subtitle-2 capitalize">{fullName}</p>
-                <p className="caption">{email}</p>
+              <div className="hidden flex-col sm:hidden lg:flex">
+                <p className="text-base font-semibold capitalize text-dark-900 dark:text-white">
+                  {fullName}
+                </p>
+                <p className="text-xs text-light-500 dark:text-light-300">
+                  {email}
+                </p>
               </div>
             </div>
             <Separator className="mb-4 bg-light-200/20" />
           </SheetTitle>
 
-          <nav className="mobile-nav">
-            <ul className="mobile-nav-list">
+          <nav>
+            <ul className="flex flex-col gap-3">
               {navItems.map(({ url, name, icon }) => (
-                <Link key={name} href={url} className="lg:w-full">
+                <Link key={name} href={url} className="w-full">
                   <li
                     className={cn(
-                      "mobile-nav-item",
-                      pathname === url && "shad-active",
+                      'flex items-center gap-3 rounded-lg px-3 py-2 text-base text-dark-800 hover:bg-light-100 dark:text-white dark:hover:bg-dark-200',
+                      pathname === url &&
+                        'bg-light-200 font-semibold dark:bg-dark-400'
                     )}
                   >
                     <Image
@@ -88,8 +94,8 @@ const MobileNavigation = ({
                       width={24}
                       height={24}
                       className={cn(
-                        "nav-icon",
-                        pathname === url && "nav-icon-active",
+                        'transition-transform duration-200',
+                        pathname === url && 'scale-110'
                       )}
                     />
                     <p>{name}</p>
@@ -101,16 +107,16 @@ const MobileNavigation = ({
 
           <Separator className="my-5 bg-light-200/20" />
 
-          <div className="flex flex-col justify-between gap-5 pb-5">
-            <FileUploader />
+          <div className="flex flex-col gap-4 pb-5">
+            <FileUploader ownerId={ownerId} accountId={accountId} />
             <Button
               type="submit"
-              className="mobile-sign-out-button"
               onClick={async () => await signOutUser()}
+              className="flex items-center gap-2 rounded-lg bg-red-500 px-4 py-2 text-white hover:bg-red-600"
             >
               <Image
                 src="/assets/icons/logout.svg"
-                alt="logo"
+                alt="logout"
                 width={24}
                 height={24}
               />

@@ -86,3 +86,7 @@
  ## (upload files section)The toast component is deprecated. Use the sonner component instead.
  - shadcn ui toast is deprecated
  - ![alt text](image.png)
+
+ ## App crashed (Fetch failed), but not all the time
+ - reason: the getuser function was not working properly:it said user not found 
+ - bug: 

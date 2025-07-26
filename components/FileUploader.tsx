@@ -66,59 +66,69 @@ const FileUploader = ({ ownerId, accountId, className }: Props) => {
 
   return (
     <div {...getRootProps()} className="cursor-pointer">
-      <input {...getInputProps()} />
-      <Button type="button" className={cn("uploader-button", className)}>
-        <Image
-          src="/assets/icons/upload.svg"
-          alt="upload"
-          width={24}
-          height={24}
-        />{" "}
-        <p>Upload</p>
-      </Button>
-      {files.length > 0 && (
-        <ul className="uploader-preview-list">
-          <h4 className="h4 text-light-100">Uploading</h4>
+  <input {...getInputProps()} />
+  <Button
+    type="button"
+    className={cn(
+      "flex items-center gap-2 rounded-md bg-brand px-4 py-2 text-white hover:bg-brand/90 focus:outline-none focus:ring-2 focus:ring-brand/50 dark:bg-brand-200 dark:hover:bg-brand-200/80 dark:focus:ring-brand-200/40",
+      className
+    )}
+  >
+    <Image
+      src="/assets/icons/upload.svg"
+      alt="upload"
+      width={24}
+      height={24}
+    />
+    <p>Upload</p>
+  </Button>
 
-          {files.map((file, index) => {
-            const { type, extension } = getFileType(file.name);
+  {files.length > 0 && (
+    <ul className="mt-6 space-y-4">
+      <h4 className="text-xl font-semibold text-light-100">Uploading</h4>
 
-            return (
-              <li
-                key={`${file.name}-${index}`}
-                className="uploader-preview-item"
-              >
-                <div className="flex items-center gap-3">
-                  <Thumbnail
-                    type={type}
-                    extension={extension}
-                    url={convertFileToUrl(file)}
-                  />
+      {files.map((file, index) => {
+        const { type, extension } = getFileType(file.name);
 
-                  <div className="preview-item-name">
-                    {file.name}
-                    <Image
-                      src="/assets/icons/file-loader.gif"
-                      width={80}
-                      height={26}
-                      alt="Loader"
-                    />
-                  </div>
-                </div>
+        return (
+          <li
+            key={`${file.name}-${index}`}
+            className="flex items-center justify-between gap-4 rounded-md border border-light-400 bg-light-800 px-4 py-3 dark:border-dark-400 dark:bg-dark-300"
+          >
+            <div className="flex items-center gap-3">
+              <Thumbnail
+                type={type}
+                extension={extension}
+                url={convertFileToUrl(file)}
+              />
 
+              <div className="text-sm text-white">
+                {file.name}
                 <Image
-                  src="/assets/icons/remove.svg"
-                  width={24}
-                  height={24}
-                  alt="Remove"
-                  onClick={(e) => handleRemoveFile(e, file.name)}
+                  src="/assets/icons/file-loader.gif"
+                  width={80}
+                  height={26}
+                  alt="Loader"
+                  className="mt-1"
                 />
-              </li>
-            );
-          })}
-        </ul>
-      )}
-    </div>
+              </div>
+            </div>
+
+            <Image
+              src="/assets/icons/remove.svg"
+              width={24}
+              height={24}
+              alt="Remove"
+              onClick={(e) => handleRemoveFile(e, file.name)}
+              className="cursor-pointer hover:opacity-70"
+            />
+          </li>
+        );
+      })}
+    </ul>
+  )}
+</div>
+
   );
 };
 

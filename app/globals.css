@@ -155,9 +155,7 @@
     --chart-5: 340 75% 55%;
   }
 }
-.form-submit-button {
-    @apply bg-brand hover:bg-brand-100 transition-all rounded-full text-[14px] leading-[20px] font-medium h-[66px];
-  }
+
 /* ----------- CUSTOM UTILITY CLASSES ----------- */
 @layer utilities {
    
