@@ -97,4 +97,7 @@
  - also user not found
  - seems the earlier bug is not fixed
  --- parallel fetch request could be a problem?
+ - checked code with reference, no difference found
+ - could be due to fast fetching
+ ------ could be due to static attempt of rendering
  

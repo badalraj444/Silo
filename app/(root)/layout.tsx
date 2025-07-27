@@ -4,14 +4,17 @@ import Sidebar from '@/components/Sidebar'
 import { getCurrentUser } from '@/lib/actions/user.actions'
 import { redirect } from 'next/navigation'
 import React from 'react'
+import { Toaster } from '@/components/ui/sonner';
 
-const layout = async ({children}:{children: React.ReactNode}) => {
+export const dynamic = "force-dynamic";
+
+const Layout = async ({children}:{children: React.ReactNode}) => {
     const currentUser = await getCurrentUser();
 
   if (!currentUser) return redirect("/sign-in");
   return (
 
-    <main className='flex  h-screen'>
+    <main className='flex  h-screen bg-brand2'>
         <Sidebar {...currentUser}/>
         <section className='flex h-full flex-1 flex-col'>
             <MobileNavigation {...currentUser}/>
@@ -20,8 +23,9 @@ const layout = async ({children}:{children: React.ReactNode}) => {
                 {children}
             </div>
         </section>
+        <Toaster/>
     </main>
   )
 }
 
-export default layout
+export default Layout

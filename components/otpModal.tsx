@@ -51,7 +51,7 @@ export const OtpModal = ({
   return (
     <div className="flex justify-center items-center">
   <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
-    <AlertDialogContent className="shad-alert-dialog">
+    <AlertDialogContent className="shad-alert-dialog bg-brand2">
       <AlertDialogHeader className="relative flex justify-center">
         
         <AlertDialogTitle className="h2 text-center">Please enter OTP</AlertDialogTitle>
@@ -68,20 +68,20 @@ export const OtpModal = ({
             onChange={setPassword}
             pattern={REGEXP_ONLY_DIGITS_AND_CHARS}
           >
-            <InputOTPGroup>
-              <InputOTPSlot index={0} />
-              <InputOTPSlot index={1} />
-              <InputOTPSlot index={2} />
-              <InputOTPSlot index={3} />
-              <InputOTPSlot index={4} />
-              <InputOTPSlot index={5} />
+            <InputOTPGroup >
+              <InputOTPSlot index={0} className='border-amber-950' />
+              <InputOTPSlot index={1} className='border-amber-950'/>
+              <InputOTPSlot index={2} className='border-amber-950'/>
+              <InputOTPSlot index={3} className='border-amber-950'/>
+              <InputOTPSlot index={4} className='border-amber-950'/>
+              <InputOTPSlot index={5} className='border-amber-950'/>
             </InputOTPGroup>
           </InputOTP>
         </div>
       </AlertDialogHeader>
       <AlertDialogFooter>
         <div className="flex w-full flex-col gap-4">
-          <AlertDialogCancel onClick={() => setIsOpen(false)} className=" text-[14px] leading-[20px] font-medium hover:to-blue-700 transition-all rounded-full">
+          <AlertDialogCancel onClick={() => setIsOpen(false)} className="bg-brand2 text-[14px] leading-[20px] font-medium transition-all rounded-full">
           Cancel
         </AlertDialogCancel>
         <AlertDialogAction onClick={handleSubmit} className="bg-brand text-[14px] leading-[20px] font-medium hover:bg-brand-100 transition-all rounded-full">

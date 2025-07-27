@@ -1,12 +1,12 @@
 "use server";
 
+import { getCurrentUser } from "@/lib/actions/user.actions";
 import { createAdminClient, createSessionClient } from "@/lib/appwrite";
-import { InputFile } from "node-appwrite/file";
 import { appwriteConfig } from "@/lib/appwrite/config";
-import { ID, Models, Query } from "node-appwrite";
 import { constructFileUrl, getFileType, parseStringify } from "@/lib/utils";
 import { revalidatePath } from "next/cache";
-import { getCurrentUser } from "@/lib/actions/user.actions";
+import { ID, Models, Query } from "node-appwrite";
+import { InputFile } from "node-appwrite/file";
 
 const handleError = (error: unknown, message: string) => {
   console.log(error, message);
@@ -94,15 +94,13 @@ export const getFiles = async ({
   types = [],
   searchText = "",
   sort = "$createdAt-desc",
-  limit
+  limit,
 }: GetFilesProps) => {
   const { databases } = await createAdminClient();
 
   try {
-    console.log("1--inside getcurrentuser...")
     const currentUser = await getCurrentUser();
-    console.log("7--after executing getcurrentUser...")
-    if (!currentUser) throw new Error("User not found");
+    if (!currentUser) throw new Error("User not found"); 
 
     const queries = createQueries(currentUser, types, searchText, sort, limit);
 

@@ -3,11 +3,11 @@
 import { createAdminClient, createSessionClient } from "@/lib/appwrite";
 import { appwriteConfig } from "@/lib/appwrite/config";
 import { ID, Query } from "node-appwrite";
-// import { parseStringify } from "@/lib/utils";
+// impparseStringify } from "@/lib/utils";
 import { avatarPlaceholderUrl } from "@/constants/index";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { parseStringify } from "../utils";
+import {parseStringify } from "../utils";
 
 const getUserByEmail = async (email: string) => {
   const { databases } = await createAdminClient();
@@ -66,7 +66,7 @@ export const createAccount = async ({
     );
   }
 
-  return await parseStringify({ accountId });
+  return parseStringify({ accountId });
 };
 
 export const verifySecret = async ({
@@ -88,30 +88,29 @@ export const verifySecret = async ({
       secure: true,
     });
 
-    return await parseStringify({ sessionId: session.$id });
+    return parseStringify({ sessionId: session.$id });
   } catch (error) {
     handleError(error, "Failed to verify OTP");
   }
 };
 
 export const getCurrentUser = async () => {
-  console.log("2--inside getCurrent ");
   try {
     const { databases, account } = await createSessionClient();
-     console.log("3---created sessionclient ");
+
     const result = await account.get();
-    console.log("4-- account obtained:  ", result);
-    const user = await databases.listDocuments( //this function could be taking time, and others are not waiting for it
+
+    const user = await databases.listDocuments(
       appwriteConfig.databaseId,
       appwriteConfig.usersCollectionId,
       [Query.equal("accountId", result.$id)],
     );
-   console.log("5--obtained userdetails: ",user)
+
     if (user.total <= 0) return null;
-    console.log("6--more than 0 values exist. now parsing....")
-    return  await parseStringify(user.documents[0]);   // maybe this line needs time and is not waiting !!!!!!!!!!!! this was the culprit
+
+    return parseStringify(user.documents[0]);
   } catch (error) {
-    console.log("error in getcurrentuser",error);
+    console.log(error);
   }
 };
 
@@ -138,7 +137,7 @@ export const signInUser = async ({ email }: { email: string }) => {
       return parseStringify({ accountId: existingUser.accountId });
     }
 
-    return await parseStringify({ accountId: null, error: "User not found" });
+    return parseStringify({ accountId: null, error: "User not found" });
   } catch (error) {
     handleError(error, "Failed to sign in user");
   }
