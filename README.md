@@ -1,6 +1,6 @@
 # Silo
 
-Silo is a personal cloud storage application that lets you upload, manage, and share files seamlessly. Built with Next.js, React, and Appwrite, Silo offers a clean, responsive interface for handling documents, images, and media.
+Silo is a cloud storage application that lets you upload, manage, and share files seamlessly. Built with Next.js, React, and Appwrite, Silo offers a clean, responsive interface for handling documents, images, and media.
 
 ## Table of Contents
 
