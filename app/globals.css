@@ -6,9 +6,20 @@
 /* ----------- THEME VARIABLES ----------- */
 @theme {
   /* 🎨 Custom colors */
-  --color-brand-100: #EA6365;
-  --color-brand: #FA7275;
-  --color-brand2: #E6E4B9;
+  --color-brand-100: #FF88C2; /* Lighter Pink */
+  --color-brand: #E84D8E;     /* Primary Pink */
+  --color-brand2: #000000;     /* Darker Pink */
+  
+  /* Black/Near-Black Colors */
+  --color-light-100: #0D0D0D; /* Near Black */
+  --color-light-200: #1A1A1A; /* Dark Gray */
+  --color-light-300: #262626; /* Mid Gray */
+  --color-light-400: #333333; /* Light Gray */
+
+  --color-dark-100: #000000; /* Pure Black (Used for Dark Background) */
+  --color-dark-200: #FFFFFF; /* Pure White (Used for Dark Text) */
+
+  /* Standard Colors (kept for utility) */
   --color-red: #FF7474;
   --color-error: #b80000;
   --color-green: #3DD9B3;
@@ -16,13 +27,6 @@
   --color-pink: #EEA8FD;
   --color-orange: #F9AB72;
 
-  --color-light-100: #333F4E;
-  --color-light-200: #A3B2C7;
-  --color-light-300: #F2F5F9;
-  --color-light-400: #F2F4F8;
-
-  --color-dark-100: #04050C;
-  --color-dark-200: #131524;
 
   --color-background: hsl(var(--background));
   --color-foreground: hsl(var(--foreground));
@@ -74,8 +78,12 @@
     @apply scroll-smooth;
   }
 
+  /*
+   * Default body applies a light theme look.
+   * If .dark is applied to a parent, the .dark HSL values take over.
+   */
   body {
-    @apply bg-white text-dark-200 min-h-screen;
+    @apply bg-white text-dark-100 min-h-screen; /* Use a default light theme for non-dark mode */
   }
 
   /* Remove scrollbar */
@@ -95,22 +103,23 @@
   }
 
   .remove-scrollbar::-webkit-scrollbar-thumb:hover {
-    /* background: #1e2238; */
     background: transparent;
   }
 
   .recharts-responsive-container {
     height: initial !important;
   }
+  
+  /* --- LIGHT THEME (DEFAULT) --- */
   :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 3.9%;
+    --background: 0 0% 100%;       /* Pure White Background */
+    --foreground: 0 0% 3.9%;       /* Near Black Text */
     --card: 0 0% 100%;
     --card-foreground: 0 0% 3.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 3.9%;
-    --primary: 0 0% 9%;
-    --primary-foreground: 0 0% 98%;
+    --primary: 326 69% 60%;        /* Pink/Magenta Primary Color */
+    --primary-foreground: 0 0% 98%;/* White Text on Primary */
     --secondary: 0 0% 96.1%;
     --secondary-foreground: 0 0% 9%;
     --muted: 0 0% 96.1%;
@@ -129,31 +138,33 @@
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
   }
+  
+  /* --- DARK THEME (BLACK & PINK) --- */
   .dark {
-    --background: 0 0% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 0 0% 3.9%;
+    --background: 0 0% 0%;         /* Pure Black Background */
+    --foreground: 0 0% 98%;        /* Near White Text */
+    --card: 0 0% 4.9%;             /* Very Dark Gray Card */
     --card-foreground: 0 0% 98%;
-    --popover: 0 0% 3.9%;
+    --popover: 0 0% 0%;
     --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 0 0% 9%;
+    --primary: 326 69% 60%;        /* Primary Pink/Magenta */
+    --primary-foreground: 0 0% 9%; /* Dark Text on Primary */
     --secondary: 0 0% 14.9%;
     --secondary-foreground: 0 0% 98%;
     --muted: 0 0% 14.9%;
     --muted-foreground: 0 0% 63.9%;
-    --accent: 0 0% 14.9%;
+    --accent: 326 69% 60%;         /* Pink Accent */
     --accent-foreground: 0 0% 98%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
     --border: 0 0% 14.9%;
     --input: 0 0% 14.9%;
-    --ring: 0 0% 83.1%;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
+    --ring: 326 69% 60%;           /* Pink Ring Focus */
+    --chart-1: 326 69% 60%;        /* Pink Chart Color */
+    --chart-2: 220 70% 50%;
+    --chart-3: 160 60% 45%;
+    --chart-4: 30 80% 55%;
+    --chart-5: 280 65% 60%;
   }
 }
 

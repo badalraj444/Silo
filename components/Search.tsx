@@ -72,7 +72,7 @@ const Search = () => {
         {results.length > 0 ? (
           results.map((file) => (
             <li
-              className="flex cursor-pointer items-center justify-between rounded-lg px-3 py-2 hover:bg-light-100 dark:hover:bg-dark-200"
+              className="flex cursor-pointer items-center justify-between rounded-lg px-3 py-2  dark:hover:bg-white"
               key={file.$id}
               onClick={() => handleClickItem(file)}
             >
@@ -83,7 +83,7 @@ const Search = () => {
                   url={file.url}
                   className="size-9 min-w-9"
                 />
-                <p className="text-base font-semibold text-light-100 truncate">
+                <p className="text-base font-semibold text-light-100 hover:black truncate">
                   {file.name}
                 </p>
               </div>

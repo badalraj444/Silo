@@ -19,9 +19,9 @@ const Sidebar = ({ fullName, avatar, email }: Props) => {
     <aside className="overflow-auto px-5 py-7 hidden h-screen w-[90px] flex-col remove-scrollbar sm:flex lg:w-[280px] xl:w-[325px]">
       <Link href="/">
         <Image
-          src="/assets/icons/logo-full-brand2.svg"
+          src="/assets/images/silo-cloud-logo.png"
           alt="logo"
-          width={160}
+          width={100}
           height={50}
           className="hidden h-auto lg:block"
         />
@@ -41,9 +41,9 @@ const Sidebar = ({ fullName, avatar, email }: Props) => {
             <Link key={name} href={url} className="lg:w-full">
               <li
                 className={cn(
-                  'flex text-[#333F4E] gap-4 rounded-xl lg:w-full justify-center lg:justify-start items-center text-[16px] leading-[24px] font-semibold lg:px-[30px] h-[52px] lg:rounded-full',
+                  'flex text-white gap-4 rounded-xl lg:w-full justify-center lg:justify-start items-center text-[16px] leading-[24px] font-semibold lg:px-[30px] h-[52px] lg:rounded-full',
                   pathname === url &&
-                    'bg-[#FA7275] text-white shadow-[0_8px_30px_0_rgba(65,89,214,0.3)]'
+                    'bg-brand text-white shadow-[0_8px_30px_0_rgba(65,89,214,0.3)]'
                 )}
               >
                 <Image
@@ -71,7 +71,7 @@ const Sidebar = ({ fullName, avatar, email }: Props) => {
         className="w-full"
       />
 
-      <div className="mt-4 flex items-center justify-center gap-2 rounded-full bg-[#FA7275]/10 p-1 text-[#333F4E] lg:justify-start lg:p-3">
+      <div className="mt-4 flex items-center justify-center gap-2 rounded-full bg-brand-100/10 p-1 text-white lg:justify-start lg:p-3">
         <Image
           src={avatar}
           alt="Avatar"

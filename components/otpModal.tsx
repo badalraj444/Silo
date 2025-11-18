@@ -51,13 +51,13 @@ export const OtpModal = ({
   return (
     <div className="flex justify-center items-center">
   <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
-    <AlertDialogContent className="shad-alert-dialog bg-brand2">
+    <AlertDialogContent className="shad-alert-dialog bg-white">
       <AlertDialogHeader className="relative flex justify-center">
         
         <AlertDialogTitle className="h2 text-center">Please enter OTP</AlertDialogTitle>
-        <AlertDialogDescription className="subtitle-2 text-center text-light-100">
+        <AlertDialogDescription className="subtitle-2 text-center text-black">
           we've sent an one time password to{' '}
-          <span className="text-[#EA6365]">{email}</span>
+          <span className="text-primary">{email}</span>
           <br /> Please enter it below to verify your account.
           <br />
         </AlertDialogDescription>
@@ -69,19 +69,19 @@ export const OtpModal = ({
             pattern={REGEXP_ONLY_DIGITS_AND_CHARS}
           >
             <InputOTPGroup >
-              <InputOTPSlot index={0} className='border-amber-950' />
-              <InputOTPSlot index={1} className='border-amber-950'/>
-              <InputOTPSlot index={2} className='border-amber-950'/>
-              <InputOTPSlot index={3} className='border-amber-950'/>
-              <InputOTPSlot index={4} className='border-amber-950'/>
-              <InputOTPSlot index={5} className='border-amber-950'/>
+              <InputOTPSlot index={0} className='border-primary text-black' />
+              <InputOTPSlot index={1} className='border-primary text-black'/>
+              <InputOTPSlot index={2} className='border-primary text-black'/>
+              <InputOTPSlot index={3} className='border-primary text-black'/>
+              <InputOTPSlot index={4} className='border-primary text-black'/>
+              <InputOTPSlot index={5} className='border-primary text-black'/>
             </InputOTPGroup>
           </InputOTP>
         </div>
       </AlertDialogHeader>
       <AlertDialogFooter>
         <div className="flex w-full flex-col gap-4">
-          <AlertDialogCancel onClick={() => setIsOpen(false)} className="bg-brand2 text-[14px] leading-[20px] font-medium transition-all rounded-full">
+          <AlertDialogCancel onClick={() => setIsOpen(false)} className="bg-white text-[14px] leading-[20px] font-medium transition-all rounded-full">
           Cancel
         </AlertDialogCancel>
         <AlertDialogAction onClick={handleSubmit} className="bg-brand text-[14px] leading-[20px] font-medium hover:bg-brand-100 transition-all rounded-full">

@@ -74,7 +74,7 @@ export function AuthForm({ type }: { type: FormType }) {
     onSubmit={form.handleSubmit(onSubmit)}
     className="flex max-h-[800px] w-full max-w-[580px] flex-col justify-center space-y-6 transition-all lg:h-full lg:space-y-8"
   >
-    <h1 className="text-[34px] leading-[42px] font-bold text-center text-light-100 md:text-left">
+    <h1 className="text-[34px] leading-[42px] font-bold text-center text-white md:text-left">
       {type === 'sign-in' ? 'Sign-in' : 'Sign-up'}
     </h1>
     {type === 'sign-up' && (
@@ -84,14 +84,14 @@ export function AuthForm({ type }: { type: FormType }) {
         render={({ field }) => (
           <FormItem>
             <div className="flex h-[78px] flex-col justify-center rounded-xl border border-light-300 px-4 shadow-[0px_10px_30px_0px_rgba(66,71,97,0.1)]">
-              <FormLabel className="text-light-100 pt-2 text-[14px] leading-[20px] font-normal w-full">
+              <FormLabel className="text-white pt-2 text-[14px] leading-[20px] font-normal w-full">
                 Full Name
               </FormLabel>
               <FormControl>
                 <Input
                   placeholder="Please enter your full name"
                   {...field}
-                  className="border-none shadow-none p-0 outline-none ring-offset-transparent focus:ring-transparent focus:ring-offset-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0 placeholder:text-light-200 text-[14px] leading-[20px] font-normal"
+                  className="border-none shadow-none p-0 outline-none ring-offset-transparent focus:ring-transparent focus:ring-offset-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0 text-white text-[14px] leading-[20px] font-normal"
                 />
               </FormControl>
             </div>
@@ -106,7 +106,7 @@ export function AuthForm({ type }: { type: FormType }) {
       render={({ field }) => (
         <FormItem>
           <div className="flex h-[78px] flex-col justify-center rounded-xl border border-light-300 px-4 shadow-[0px_10px_30px_0px_rgba(66,71,97,0.1)]">
-            <FormLabel className="text-light-100 pt-2 text-[14px] leading-[20px] font-normal w-full">
+            <FormLabel className="text-white pt-2 text-[14px] leading-[20px] font-normal w-full">
               Email
             </FormLabel>
             <FormControl>
@@ -114,7 +114,7 @@ export function AuthForm({ type }: { type: FormType }) {
                 type="email"
                 placeholder="Please enter your email address"
                 {...field}
-                className="border-none shadow-none p-0 outline-none ring-offset-transparent focus:ring-transparent focus:ring-offset-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0 placeholder:text-light-200 text-[14px] leading-[20px] font-normal"
+                className="border-none shadow-none p-0 outline-none ring-offset-transparent focus:ring-transparent focus:ring-offset-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0  text-white text-[14px] leading-[20px] font-normal"
               />
             </FormControl>
           </div>

@@ -1,4 +1,4 @@
-# <img src="logo.svg" alt="Silo Logo" width="65" style="position: relative; top: 12px;" /> Silo
+# <img src="snaps/silo-cloud-logo.png" alt="Silo Logo" width="65" style="position: relative; top: 12px;" /> Cloud Storage
 **Seamless Cloud Storage — Upload, Manage & Share Files with Ease**
 
 
@@ -101,39 +101,17 @@ Visit **http://localhost:3000**
 4. **Share Files** – Share directly via email.  
 5. **Track Storage** – View remaining capacity on the dashboard.
 
----
 
-## 📂 Project Structure
-```
-├── app/                  # Next.js App Router pages & layouts
-│   ├── (auth)/           # Authentication routes
-│   ├── (root)/           # Main app routes
-│   └── globals.css       # Global styles
-├── components/           # Reusable UI components
-├── lib/                  # Appwrite setup, actions, utilities
-├── public/               # Static assets & screenshots
-├── types/                # Custom TypeScript definitions
-├── .env.example          # Example env variables
-├── next.config.ts        # Next.js config
-├── package.json          # Scripts & dependencies
-└── tsconfig.json         # TypeScript config
-```
 
 ---
 
-## 📷 Screenshots
+## 📷 Snapshots
 
-**Sign Up Page**  
-![signup page](signup.png)
+**Authentication Page**  
+![signup page](snaps/signup.png)
 
 **Dashboard**  
-![dashboard](dashboard.png)
-
----
-
-## 🤝 Contributing
-Contributions welcome!  
-Open issues or submit PRs for bug fixes and features.
+![dashboard](snaps/dashboard.png)
 
 ---
 
